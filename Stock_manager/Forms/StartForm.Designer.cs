@@ -33,12 +33,14 @@ namespace Stock_manager.Forms
             this.exit_btn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.users = new System.Windows.Forms.ComboBox();
+            this.name = new System.Windows.Forms.TextBox();
+            this.error = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // enter_btn
             // 
             this.enter_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.enter_btn.Location = new System.Drawing.Point(502, 206);
+            this.enter_btn.Location = new System.Drawing.Point(502, 179);
             this.enter_btn.Name = "enter_btn";
             this.enter_btn.Size = new System.Drawing.Size(166, 53);
             this.enter_btn.TabIndex = 0;
@@ -76,11 +78,33 @@ namespace Stock_manager.Forms
             this.users.Size = new System.Drawing.Size(277, 24);
             this.users.TabIndex = 4;
             // 
+            // name
+            // 
+            this.name.Location = new System.Drawing.Point(167, 179);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(277, 22);
+            this.name.TabIndex = 5;
+            this.name.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // error
+            // 
+            this.error.AutoSize = true;
+            this.error.ForeColor = System.Drawing.Color.Red;
+            this.error.Location = new System.Drawing.Point(167, 275);
+            this.error.Name = "error";
+            this.error.Size = new System.Drawing.Size(46, 17);
+            this.error.TabIndex = 6;
+            this.error.Text = "label2";
+            this.error.Visible = false;
+            this.error.Click += new System.EventHandler(this.label2_Click);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 450);
+            this.Controls.Add(this.error);
+            this.Controls.Add(this.name);
             this.Controls.Add(this.users);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.exit_btn);
@@ -102,5 +126,7 @@ namespace Stock_manager.Forms
         private System.Windows.Forms.Button exit_btn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox users;
+        private System.Windows.Forms.TextBox name;
+        private System.Windows.Forms.Label error;
     }
 }

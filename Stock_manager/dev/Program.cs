@@ -18,7 +18,7 @@ namespace Stock_manager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AccountantForm());
+            Application.Run(new StartForm());
         }
     }
 }

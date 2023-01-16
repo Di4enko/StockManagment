@@ -30,8 +30,6 @@ D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\System.Text.Json.xml
 D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\System.Threading.Channels.xml
 D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\System.ValueTuple.xml
-D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_manager.Forms.AccountManagerForm.resources
-D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_manager.Forms.Stock.resources
 D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_managment.csproj.CopyComplete
 D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\MySql.Data.dll
 D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\Google.Protobuf.dll
@@ -41,4 +39,9 @@ D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\BouncyCastle.Crypto.dll
 D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\K4os.Compression.LZ4.dll
 D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\K4os.Hash.xxHash.dll
 D:\Programming\C#\Stock_manager\Stock_manager\bin\Debug\MySql.Data.xml
+D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_manager.Forms.CustomerForm.resources
+D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_manager.Forms.CustomerManagerForm.resources
 D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_manager.Forms.AccountantForm.resources
+D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_manager.Forms.CourierForm.resources
+D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_manager.Forms.PurchasingManagerForm.resources
+D:\Programming\C#\Stock_manager\Stock_manager\obj\Debug\Stock_manager.Forms.StorekeeperForm.resources

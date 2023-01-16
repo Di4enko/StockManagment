@@ -88,32 +88,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dev\DAO\CompanyOrderDAO.cs" />
     <Compile Include="dev\DAO\DBConnection.cs" />
     <Compile Include="dev\DAO\StockDAO.cs" />
     <Compile Include="dev\Enums\Post.cs" />
-    <Compile Include="dev\Logic\AccountantFormLogic.cs" />
     <Compile Include="dev\DAO\OrderDAO.cs" />
+    <Compile Include="dev\Logic\CompanyOrdersManager.cs" />
     <Compile Include="dev\Logic\OrderManager.cs" />
+    <Compile Include="dev\Logic\StockManager.cs" />
     <Compile Include="dev\Objects\Product.cs" />
     <Compile Include="dev\Objects\User.cs" />
     <Compile Include="dev\Program.cs" />
+    <Compile Include="Forms\CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomerManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerManagerForm.Designer.cs">
+      <DependentUpon>CustomerManagerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AccountantForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AccountantForm.Designer.cs">
       <DependentUpon>AccountantForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AccountManagerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AccountManagerForm.Designer.cs">
-      <DependentUpon>AccountManagerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AdminForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AdminForm.Designer.cs">
-      <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CourierForm.cs">
       <SubType>Form</SubType>
@@ -133,12 +135,6 @@
     <Compile Include="Forms\StartForm.Designer.cs">
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Stock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Stock.Designer.cs">
-      <DependentUpon>Stock.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\StorekeeperForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,14 +145,23 @@
     <EmbeddedResource Include="Forms\AccountantForm.resx">
       <DependentUpon>AccountantForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AccountManagerForm.resx">
-      <DependentUpon>AccountManagerForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CourierForm.resx">
+      <DependentUpon>CourierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerManagerForm.resx">
+      <DependentUpon>CustomerManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PurchasingManagerForm.resx">
+      <DependentUpon>PurchasingManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Stock.resx">
-      <DependentUpon>Stock.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\StorekeeperForm.resx">
+      <DependentUpon>StorekeeperForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

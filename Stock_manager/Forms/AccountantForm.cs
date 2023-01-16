@@ -1,92 +1,222 @@
-﻿using Stock_manager.dev.DAO;
-using Stock_manager.dev.Logic;
+﻿using Stock_manager.dev.Logic;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Stock_manager.Forms
 {
     public partial class AccountantForm : Form
     {
-        private StockDAO stockDAO = new StockDAO();
-        private OrderManager orderManager = new OrderManager();
-        private List<string[]> order = new List<string[]>();
-        private bool errors = false;
-
-        public AccountantForm()
+        public AccountantForm(string name)
         {
             InitializeComponent();
-            stockDAO.create_accountant_table(products);
+            label1.Text = name;
+            customerOrdersTable.Visible = true;
+            customerOrderID.Visible = true;
+            bill.Visible = true;
+            reloadCustomerOrders.Visible = true;
+            customerOrdersLabel.Visible = true;
+            storekeeperOrdersTable.Visible = false;
+            reloadStorekeeperOrders.Visible = false;
+            pay.Visible = false;
+            storekeeperOrderID.Visible = false;
+            storekeeperOrdersLabel.Visible = false;
+            ordersTable.Visible = false;
+            orderID.Visible = false;
+            reloadOrders.Visible = false;
+            capitalize.Visible = false;
+            capitzlizeOrdersLabel.Visible = false;
         }
 
-        private void createOrder_btn_click(object sender, EventArgs e)
+        private OrderManager orderManager = new OrderManager();
+        private CompanyOrdersManager companyOrdersManager = new CompanyOrdersManager();
+        private int customerID = 0;
+        private int storekeeperID = 0;
+        private int ID = 0;
+
+        private void customerOrdersTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (accountantName.Text == String.Empty)
+            int row = int.Parse(e.RowIndex.ToString());
+            //ошибка при пустой таблице
+            customerID = int.Parse(customerOrdersTable.Rows[row].Cells[0].Value.ToString());
+            customerOrderID.Text = customerOrdersTable.Rows[row].Cells[0].Value.ToString();
+        }
+
+        private void reloadCustomerOrders_Click(object sender, EventArgs e)
+        {
+            customerOrdersTable.Rows.Clear();
+            List<string[]> ordersList = orderManager.getCustomerOrders();
+
+            foreach (string[] order in ordersList)
             {
-                nameError.Text = "Name can not be empty";
-                nameError.Visible = true;
-                errors = true;
-            }
-            else if (!Regex.IsMatch(accountantName.Text, @"^[a-zA-Z]+$"))
-            {
-                nameError.Text = "Name can not contains numbers!";
-                nameError.Visible = true;
-                errors = true;
-            }
-            if (order.Count == 0) 
-            { 
-                productError.Text = "Order can not be empty!";
-                productError.Visible = true;
-                errors = true;
-            }
-            if (!errors)
-            {
-                orderManager.create_order(products, accountantName.Text);
-                productError.Visible = false;
-                nameError.Visible = false;
+                customerOrdersTable.Rows.Add(order);
             }
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void storekeeperOrdersTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int row = int.Parse(e.RowIndex.ToString());
+            //ошибка при пустой таблице
+            storekeeperID = int.Parse(storekeeperOrdersTable.Rows[row].Cells[0].Value.ToString());
+            storekeeperOrderID.Text = storekeeperOrdersTable.Rows[row].Cells[0].Value.ToString();
 
         }
 
-        private void accountantName_TextChanged(object sender, EventArgs e)
+        private void reloadStorekeeperOrders_Click(object sender, EventArgs e)
         {
+            ordersTable.Rows.Clear();
+            List<string[]> ordersList = companyOrdersManager.getStorekeeperOrders();
 
-        }
-
-        private void products_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int row = e.RowIndex;
-            if (products.Rows[row].Cells["count"].Value == null)
+            foreach (string[] order in ordersList)
             {
-                productError.Text = "Can not add product without count!";
-                productError.Visible = true;
-                errors = true;
+                customerOrdersTable.Rows.Add(order);
             }
-            else if (int.Parse(products.Rows[row].Cells["count"].Value.ToString()) <= 0)
+
+        }
+
+        private void ordersTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int row = int.Parse(e.RowIndex.ToString());
+            //ошибка при пустой таблице
+            ID = int.Parse(ordersTable.Rows[row].Cells[0].Value.ToString());
+            orderID.Text = ordersTable.Rows[row].Cells[0].Value.ToString();
+        }
+
+        private void reloadOrders_Click(object sender, EventArgs e)
+        {
+            customerOrdersTable.Rows.Clear();
+            List<string[]> ordersList = companyOrdersManager.getCapitalizeOrders();
+
+            foreach (string[] order in ordersList)
             {
-                productError.Text = "You can not add product with count lower or equals 0!";
-                productError.Visible = true;
-                errors = true;
+                customerOrdersTable.Rows.Add(order);
+            }
+        }
+
+        private void bill_Click(object sender, EventArgs e)
+        {
+            if (customerID != 0)
+            {
+                orderManager.bill(customerID);
+                billLabel.Visible = true;
+                payLabel.Visible = false;
+                capitalizeLabel.Visible = false;
+                error.Visible = false;
+            } else
+            {
+                billLabel.Visible = false;
+                payLabel.Visible = false;
+                capitalizeLabel.Visible = false;
+                error.Visible = true;
+            }
+        }
+
+        private void pay_Click(object sender, EventArgs e)
+        {
+            if (storekeeperID != 0)
+            {
+                companyOrdersManager.pay(storekeeperID);
+                payLabel.Visible = true;
+                billLabel.Visible = false;
+                capitalizeLabel.Visible = false;
+                error.Visible = false;
             }
             else
             {
-                string productName = products.Rows[row].Cells["product"].Value.ToString();
-                string productCount = products.Rows[row].Cells["count"].Value.ToString();
-                string price = (int.Parse(products.Rows[row].Cells["price"].Value.ToString()) * int.Parse(productCount)).ToString();
-                order.Add(new string[] {productName, productCount});
-                string newProduct = String.Format("Name:{0} Count:{1}: Price:{2}", productName, productCount, price);
-                accountantOrder.Items.Add(newProduct);
+                billLabel.Visible = false;
+                payLabel.Visible = false;
+                capitalizeLabel.Visible = false;
+                error.Visible = true;
             }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void capitalize_Click(object sender, EventArgs e)
         {
+            if (ID != 0)
+            {
+                companyOrdersManager.capitalize(ID);
+                capitalizeLabel.Visible = true;
+                payLabel.Visible = false;
+                billLabel.Visible = false;
+                error.Visible = false;
+            }
+            else
+            {
+                billLabel.Visible = false;
+                payLabel.Visible = false;
+                capitalizeLabel.Visible = false;
+                error.Visible = true;
+            }
+        }
 
+        private void back_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            StartForm startForm = new StartForm();
+            startForm.Show();
+        }
+
+        private void customerOrders_Click(object sender, EventArgs e)
+        {
+            customerOrdersTable.Visible = true;
+            customerOrderID.Visible = true;
+            bill.Visible = true;
+            reloadCustomerOrders.Visible = true;
+            customerOrdersLabel.Visible = true;
+            storekeeperOrdersTable.Visible = false;
+            reloadStorekeeperOrders.Visible = false;
+            pay.Visible = false;
+            storekeeperOrderID.Visible = false;
+            storekeeperOrdersLabel.Visible = false;
+            ordersTable.Visible = false;
+            orderID.Visible = false;
+            reloadOrders.Visible = false;
+            capitalize.Visible = false;
+            capitzlizeOrdersLabel.Visible = false;
+        }
+
+        private void storekeeperOrders_Click(object sender, EventArgs e)
+        {
+            customerOrdersTable.Visible = false;
+            customerOrderID.Visible = false;
+            bill.Visible = false;
+            reloadCustomerOrders.Visible = false;
+            customerOrdersLabel.Visible = false;
+            storekeeperOrdersTable.Visible = true;
+            reloadStorekeeperOrders.Visible = true;
+            pay.Visible = true;
+            storekeeperOrderID.Visible = true;
+            storekeeperOrdersLabel.Visible = true;
+            ordersTable.Visible = false;
+            orderID.Visible = false;
+            reloadOrders.Visible = false;
+            capitalize.Visible = false;
+            capitzlizeOrdersLabel.Visible = false;
+        }
+
+        private void receipt_Click(object sender, EventArgs e)
+        {
+            customerOrdersTable.Visible = false;
+            customerOrderID.Visible = false;
+            bill.Visible = false;
+            reloadCustomerOrders.Visible = false;
+            customerOrdersLabel.Visible = false;
+            storekeeperOrdersTable.Visible = false;
+            reloadStorekeeperOrders.Visible = false;
+            pay.Visible = false;
+            storekeeperOrderID.Visible = false;
+            storekeeperOrdersLabel.Visible = false;
+            ordersTable.Visible = true;
+            orderID.Visible = true;
+            reloadOrders.Visible = true;
+            capitalize.Visible = true;
+            capitzlizeOrdersLabel.Visible = true;
         }
     }
 }

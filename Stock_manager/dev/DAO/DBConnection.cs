@@ -9,8 +9,6 @@ namespace Stock_manager.dev.DAO
 {
     class DBConnection
     {
-
-        private static DBConnection dbConnection;
         private const string connString = "Server=127.0.0.1;Port=3306;Username=dima;Password=D12112002r;Database=stock_maangment";
         private MySqlConnection connection = new MySqlConnection(connString);
         
